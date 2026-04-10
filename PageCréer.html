@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Créer une Prédiction | Blue Team</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="PageCréer.css">
+</head>
+
+<body>
+
+    <header class="header">
+        <div class="header-container">
+            <a href="index.html" class="logo">
+                <div class="logo-icon">🔥</div>
+                <span class="logo-text">Blue Team : Maxence, Carle, Eddie</span>
+            </a>
+            <nav class="nav">
+                <a href="index.html" class="nav-link">Accueil</a>
+                <a href="PageCréer.html" class="nav-link active">Créer</a>
+                <a href="#" class="nav-link">Résultats</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="create-wrapper">
+            <div class="hero" style="padding: 3rem 0;">
+                <h1>Lancez une prédiction</h1>
+                <p>Posez une question à la communauté. Soyez clair, précis et impartial.</p>
+            </div>
+
+            <form class="create-form">
+                <div class="form-group">
+                    <label for="category">Catégorie</label>
+                    <select id="category" class="form-input">
+                        <option value="Technologie">Technologie</option>
+                        <option value="Sport">Sport</option>
+                        <option value="Culture">Culture</option>
+                        <option value="Température">Température</option>
+                        <option value="Science">Science</option>
+                        <option value="Politique">Politique</option>
+                        <option value="Jeux">Jeux</option>
+                        <option value="Universitaire">Universitaire</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="question">Votre question</label>
+                    <textarea id="question" class="form-input"
+                        placeholder="Ex: L'IA remplacera-t-elle les designers en 2027 ?" rows="3"></textarea>
+                    <small>La question doit pouvoir être répondue par OUI ou NON.</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="date">Date de clôture</label>
+                    <input type="date" id="date" class="form-input">
+                </div>
+
+                <div class="form-group">
+                    <label>Image d'illustration (Optionnel)</label>
+                    <div class="file-upload">
+                        <span>Cliquez pour ajouter une image</span>
+                    </div>
+                </div>
+
+                <button type="submit" class="button" style="width: 100%; margin-top: 2rem;">Publier la
+                    prédiction</button>
+            </form>
+        </div>
+    </main>
+
+    <footer class="main-footer">
+        © 2026 Prédire. La prédiction est entre vos mains. Ynov campus. Maxence, Carle, Eddie.
+    </footer>
+
+</body>
+
+</html>
