@@ -6,15 +6,8 @@ using System.Text.Json;
 
 namespace SiteDePrediction
 {
-    public enum Category { Technologie, Sport, Culture, Temperature, Universitaire }
+    public enum Category { Technologie, Sport, Culture, Temperature, Universitaire, Finance }
     public enum PredictionStatus { Open, Resolved }
-
-    public class Bet
-    {
-        public bool IsYes { get; set; }
-        public decimal Amount { get; set; }
-        public double OddsAtTime { get; set; }
-    }
 
     public class Prediction
     {
@@ -24,7 +17,7 @@ namespace SiteDePrediction
         public int YesVotes { get; set; }
         public int NoVotes { get; set; }
         public PredictionStatus Status { get; set; } = PredictionStatus.Open;
-        public bool? Result { get; set; }
+        public string ClosingDate { get; set; } = "31 Dec 2026";
 
         public int Total => YesVotes + NoVotes;
         public double YesPct => Total == 0 ? 50 : Math.Round((double)YesVotes / Total * 100, 1);
@@ -32,27 +25,13 @@ namespace SiteDePrediction
         public double OddsYes => YesPct == 0 ? 10 : Math.Round(100 / YesPct, 2);
         public double OddsNo => NoPct == 0 ? 10 : Math.Round(100 / NoPct, 2);
 
-        public Prediction() { } // Constructeur vide pour JSON
-        public Prediction(int id, string question, Category category) 
+        public Prediction() { }
+        public Prediction(int id, string question, Category category, string date) 
         { 
             Id = id; 
             Question = question; 
-            Category = category; 
-        }
-    }
-
-    public class User
-    {
-        public string Name { get; set; }
-        public decimal Balance { get; set; } = 1000;
-        public List<Bet> Bets { get; set; } = new List<Bet>();
-
-        public void Bet(Prediction p, bool isYes, decimal amount)
-        {
-            if (p.Status != PredictionStatus.Open || Balance < amount) return;
-            Balance -= amount;
-            Bets.Add(new Bet { IsYes = isYes, Amount = amount, OddsAtTime = isYes ? p.OddsYes : p.OddsNo });
-            if (isYes) p.YesVotes++; else p.NoVotes++;
+            Category = category;
+            ClosingDate = date;
         }
     }
 
@@ -62,39 +41,75 @@ namespace SiteDePrediction
 
         public void Load()
         {
-            if (File.Exists("data.json")) Predictions = JsonSerializer.Deserialize<List<Prediction>>(File.ReadAllText("data.json"));
-            else InitDefaults();
+            if (File.Exists("data.json")) 
+                Predictions = JsonSerializer.Deserialize<List<Prediction>>(File.ReadAllText("data.json"));
+            else 
+                InitDefaults();
         }
 
         private void InitDefaults()
         {
-            Predictions.Add(new Prediction(1, "Monsieur Tétar sera-t-il à l'heure ?", Category.Universitaire) { YesVotes = 10, NoVotes = 500 });
-            Predictions.Add(new Prediction(2, "La France gagnera le prochain match ?", Category.Sport) { YesVotes = 300, NoVotes = 200 });
+            Predictions.Add(new Prediction(1, "La France gagnera-t-elle la Coupe du Monde 2026 ?", Category.Sport, "18 Dec 2026") { YesVotes = 450, NoVotes = 200 });
+            Predictions.Add(new Prediction(2, "Le Bitcoin dépassera-t-il les 100k$ avant 2027 ?", Category.Finance, "1 Jan 2027") { YesVotes = 800, NoVotes = 150 });
+            Predictions.Add(new Prediction(3, "L'IA remplacera-t-elle les développeurs juniors cette année ?", Category.Technologie, "31 Dec 2026") { YesVotes = 120, NoVotes = 600 });
         }
 
-        public void Save() => File.WriteAllText("data.json", JsonSerializer.Serialize(Predictions));
+        public void Save() => File.WriteAllText("data.json", JsonSerializer.Serialize(Predictions, new JsonSerializerOptions { WriteIndented = true }));
 
         public void GenerateHtml()
         {
             string cards = string.Join("", Predictions.Select(p => $@"
             <div class='poll-card'>
-                <div class='poll-category'>{p.Category} {(p.Status == PredictionStatus.Resolved ? "✅" : "⏳")}</div>
+                <div class='poll-category'>{p.Category.ToString().ToUpper()} {(p.Status == PredictionStatus.Resolved ? "✅" : "⏳")}</div>
                 <h2 class='poll-question'>{p.Question}</h2>
                 <div class='progress-section'>
                     <div class='progress-labels'>
-                        <span>OUI: {p.YesPct}% (Cote: {p.OddsYes})</span>
-                        <span>NON: {p.NoPct}% (Cote: {p.OddsNo})</span>
+                        <span class='oui-label'>OUI: {p.YesPct}% (Cote: {p.OddsYes})</span>
+                        <span class='non-label'>NON: {p.NoPct}% (Cote: {p.OddsNo})</span>
                     </div>
                     <div class='progress-bar-wrap'>
                         <div class='progress-fill-yes' style='width:{p.YesPct}%'></div>
                     </div>
                 </div>
+                <div class='poll-footer'>
+                    <span>👤 {p.Total} votes</span>
+                    <span>📅 Clôture : {p.ClosingDate}</span>
+                </div>
             </div>"));
 
-            string template = $@"<!DOCTYPE html><html lang='fr'><head><meta charset='UTF-8'><link rel='stylesheet' href='style.css'><title>Paries | Blue Team</title></head>
-            <body><header class='header'><div class='header-container'><span class='logo'>🔥 Blue Team : Paries</span><nav class='nav'><a href='index.html' class='nav-link'>Accueil</a><a href='#' class='nav-link active'>Résultats</a></nav></div></header>
-            <main class='container' style='padding-top:5rem;'><div class='hero'><h1>💰 Système de Paris</h1><p>Gérez vos jetons sur les événements futurs.</p></div>
-            <div class='poll-grid'>{cards}</div></main></body></html>";
+            string template = $@"<!DOCTYPE html>
+<html lang='fr'>
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <link rel='stylesheet' href='style.css'>
+    <title>Résultats des Paris | Blue Team</title>
+</head>
+<body>
+    <header class='header'>
+        <div class='header-container'>
+            <a href='index.html' class='logo'>🔥 Blue Team : Paries</a>
+            <nav class='nav'>
+                <a href='index.html' class='nav-link'>Accueil</a>
+                <a href='PageCréer.html' class='nav-link'>Créer</a>
+                <a href='#' class='nav-link active'>Résultats</a>
+                <button id='theme-toggle' class='theme-toggle' title='Changer de mode'>☀️</button>
+            </nav>
+        </div>
+    </header>
+    <main class='container' style='padding-top:5rem;'>
+        <div class='hero'>
+            <h1>💰 Tableau des Scores</h1>
+            <p>Consultez les tendances en temps réel sur les événements majeurs.</p>
+        </div>
+        <div class='poll-grid'>{cards}</div>
+    </main>
+    <footer class='main-footer'>
+        © 2026 Blue Team. Tous droits réservés.
+    </footer>
+    <script src='theme.js'></script>
+</body>
+</html>";
             File.WriteAllText("PageDeResultat.html", template);
         }
     }
@@ -105,15 +120,9 @@ namespace SiteDePrediction
         {
             var engine = new PredictionEngine();
             engine.Load();
-            
-            // Simulation d'un pari de Karl
-            var karl = new User { Name = "Karl" };
-            engine.Predictions.Find(p => p.Id == 1)?.Id.ToString(); // Test existence
-            karl.Bet(engine.Predictions[0], true, 100); 
-
             engine.Save();
             engine.GenerateHtml();
-            Console.WriteLine("OK : Système de paris mis à jour et PageDeResultat.html générée.");
+            Console.WriteLine("SUCCÈS : Base de données synchronisée et interface de résultats générée.");
         }
     }
 }

@@ -1,1 +1,44 @@
-[{"Id":1,"Question":"Monsieur T\u00E9tar sera-t-il \u00E0 l\u0027heure ?","Category":4,"YesVotes":12,"NoVotes":500,"Status":0,"Result":null,"Total":512,"YesPct":2.3,"NoPct":97.7,"OddsYes":43.48,"OddsNo":1.02},{"Id":2,"Question":"La France gagnera le prochain match ?","Category":1,"YesVotes":300,"NoVotes":200,"Status":0,"Result":null,"Total":500,"YesPct":60,"NoPct":40,"OddsYes":1.67,"OddsNo":2.5}]
+[
+  {
+    "Id": 1,
+    "Question": "La France gagnera-t-elle la Coupe du Monde 2026 ?",
+    "Category": 1,
+    "YesVotes": 450,
+    "NoVotes": 200,
+    "Status": 0,
+    "ClosingDate": "18 Dec 2026",
+    "Total": 650,
+    "YesPct": 69.2,
+    "NoPct": 30.8,
+    "OddsYes": 1.45,
+    "OddsNo": 3.25
+  },
+  {
+    "Id": 2,
+    "Question": "Le Bitcoin d\u00E9passera-t-il les 100k$ avant 2027 ?",
+    "Category": 5,
+    "YesVotes": 800,
+    "NoVotes": 150,
+    "Status": 0,
+    "ClosingDate": "1 Jan 2027",
+    "Total": 950,
+    "YesPct": 84.2,
+    "NoPct": 15.8,
+    "OddsYes": 1.19,
+    "OddsNo": 6.33
+  },
+  {
+    "Id": 3,
+    "Question": "L\u0027IA remplacera-t-elle les d\u00E9veloppeurs juniors cette ann\u00E9e ?",
+    "Category": 0,
+    "YesVotes": 120,
+    "NoVotes": 600,
+    "Status": 0,
+    "ClosingDate": "31 Dec 2026",
+    "Total": 720,
+    "YesPct": 16.7,
+    "NoPct": 83.3,
+    "OddsYes": 5.99,
+    "OddsNo": 1.2
+  }
+]

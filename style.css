@@ -1,17 +1,37 @@
-@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
-
 :root {
-    --bg-primary: #ffffff;
-    --bg-secondary: #f9fafb;
-    --text-primary: #ffffff;
-    --text-secondary: #d1d5db;
+    /* Base Colors - Common */
     --accent: #6ee881;
     --accent-hover: #5cd66e;
     --danger: #ef4444;
-    --border: rgba(255, 255, 255, 0.1);
-    --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
     --font-heading: 'Bricolage Grotesque', sans-serif;
     --font-body: 'Inter', sans-serif;
+    
+    /* Default - Night Mode */
+    --bg-primary: #0c1221;
+    --bg-secondary: #16203a;
+    --bg-header: rgba(12, 18, 33, 0.82);
+    --bg-card: rgba(255, 255, 255, 0.04);
+    --text-primary: #ffffff;
+    --text-secondary: #94a3b8;
+    --border: rgba(255, 255, 255, 0.1);
+    --card-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3);
+    --nav-active: #ffffff;
+    --filter-btn-bg: rgba(255, 255, 255, 0.08);
+    --filter-btn-text: #ffffff;
+}
+
+[data-theme="white"] {
+    --bg-primary: #f0f4f8;
+    --bg-secondary: #ffffff;
+    --bg-header: rgba(255, 255, 255, 0.85);
+    --bg-card: #ffffff;
+    --text-primary: #1e293b;
+    --text-secondary: #64748b;
+    --border: rgba(0, 0, 0, 0.08);
+    --card-shadow: 0 10px 15px -3px rgba(15, 23, 42, 0.1);
+    --nav-active: #0f172a;
+    --filter-btn-bg: rgba(0, 0, 0, 0.05);
+    --filter-btn-text: #1e293b;
 }
 
 * {
@@ -22,14 +42,11 @@
 
 body {
     font-family: var(--font-body);
-    background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('img/360_F_139082292_2tGXq1sTw6Dv98CVVhQe4BCz2OJUyLIq.jpg');
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
-    background-color: #0c1221;
+    background-color: var(--bg-primary);
     color: var(--text-primary);
     line-height: 1.5;
     -webkit-font-smoothing: antialiased;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .container {
@@ -44,9 +61,10 @@ body {
     padding: 1rem 0;
     position: sticky;
     top: 0;
-    background: rgba(12, 18, 33, 0.8);
-    backdrop-filter: blur(10px);
+    background: var(--bg-header);
+    backdrop-filter: blur(12px);
     z-index: 100;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
 .header-container {
@@ -72,6 +90,7 @@ body {
 .nav {
     display: flex;
     gap: 2rem;
+    align-items: center;
 }
 
 .nav-link {
@@ -83,7 +102,30 @@ body {
 
 .nav-link:hover,
 .nav-link.active {
+    color: var(--nav-active);
+}
+
+/* Theme Toggle */
+.theme-toggle {
+    background: var(--filter-btn-bg);
+    border: 1px solid var(--border);
     color: var(--text-primary);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 1.2rem;
+    transition: all 0.2s;
+    margin-left: 1rem;
+}
+
+.theme-toggle:hover {
+    background: var(--accent);
+    color: #000;
+    border-color: var(--accent);
 }
 
 /* Hero Section */
@@ -142,7 +184,7 @@ body {
 }
 
 .filter-btn {
-    background: rgba(255, 255, 255, 0.1);
+    background: var(--filter-btn-bg);
     border: 1px solid var(--border);
     padding: 0.6rem 1.2rem;
     border-radius: 100px;
@@ -150,11 +192,12 @@ body {
     font-size: 0.9rem;
     cursor: pointer;
     transition: all 0.2s;
-    color: white;
+    color: var(--filter-btn-text);
 }
 
 .filter-btn:hover {
-    background: rgba(255, 255, 255, 0.2);
+    background: var(--accent);
+    color: #000;
     border-color: var(--accent);
 }
 
@@ -173,17 +216,18 @@ body {
 }
 
 .poll-card {
-    background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(5px);
+    background: var(--bg-card);
+    backdrop-filter: blur(8px);
     padding: 2.5rem;
     border-radius: 1.5rem;
     border: 1px solid var(--border);
-    transition: transform 0.2s, box-shadow 0.2s;
+    transition: transform 0.2s, box-shadow 0.2s, background-color 0.3s, border-color 0.3s;
+    box-shadow: var(--card-shadow);
 }
 
 .poll-card:hover {
     transform: translateY(-4px);
-    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
 }
 
 .poll-category {
@@ -226,18 +270,18 @@ body {
 
 .vote-btn.yes:hover {
     background: var(--accent-hover);
-    transform: scale(1.05);
+    transform: scale(1.02);
 }
 
 .vote-btn.no {
-    background: rgba(255, 255, 255, 0.1);
-    color: white;
+    background: var(--filter-btn-bg);
+    color: var(--text-primary);
     border: 1px solid var(--border);
 }
 
 .vote-btn.no:hover {
-    background: rgba(255, 255, 255, 0.2);
-    transform: scale(1.05);
+    background: var(--border);
+    transform: scale(1.02);
 }
 
 /* Common Button */
@@ -270,13 +314,13 @@ body {
 .progress-labels {
     display: flex;
     justify-content: space-between;
-    font-size: 0.85rem;
+    font-size: 1rem;
     font-weight: 700;
     margin-bottom: 0.75rem;
 }
 
 .oui-label {
-    color: var(--text-primary);
+    color: var(--accent);
 }
 
 .non-label {
@@ -285,7 +329,7 @@ body {
 
 .progress-bar-wrap {
     height: 10px;
-    background: rgba(255, 255, 255, 0.1);
+    background: var(--border);
     border-radius: 10px;
     display: flex;
     overflow: hidden;
@@ -297,7 +341,7 @@ body {
 }
 
 .progress-fill-no {
-    background: rgba(255, 255, 255, 0.05);
+    background: transparent;
     height: 100%;
 }
 
@@ -320,7 +364,7 @@ body {
 }
 
 .badge-ongoing {
-    background: rgba(255, 255, 255, 0.1);
+    background: var(--filter-btn-bg);
     color: var(--text-secondary);
     padding: 2px 8px;
     border-radius: 4px;
@@ -334,6 +378,7 @@ body {
     border-top: 1px solid var(--border);
     color: var(--text-secondary);
     font-size: 0.9rem;
+    transition: border-color 0.3s ease;
 }
 
 /* Responsive */

@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("SiteDePrediction")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+03eb4b3242a4ecc514252a20fc03f8d622fb26c6")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a4f54273f1b46fe5dc21992e3222b25b5fb18bbe")]
 [assembly: System.Reflection.AssemblyProductAttribute("SiteDePrediction")]
 [assembly: System.Reflection.AssemblyTitleAttribute("SiteDePrediction")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
