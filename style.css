@@ -3,13 +3,13 @@
 :root {
     --bg-primary: #ffffff;
     --bg-secondary: #f9fafb;
-    --text-primary: #000000;
-    --text-secondary: #6b7280;
+    --text-primary: #ffffff;
+    --text-secondary: #d1d5db;
     --accent: #6ee881;
     --accent-hover: #5cd66e;
     --danger: #ef4444;
-    --border: #e5e7eb;
-    --card-shadow: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06);
+    --border: rgba(255, 255, 255, 0.1);
+    --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
     --font-heading: 'Bricolage Grotesque', sans-serif;
     --font-body: 'Inter', sans-serif;
 }
@@ -22,7 +22,11 @@
 
 body {
     font-family: var(--font-body);
-    background-color: var(--bg-primary);
+    background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('img/360_F_139082292_2tGXq1sTw6Dv98CVVhQe4BCz2OJUyLIq.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-color: #0c1221;
     color: var(--text-primary);
     line-height: 1.5;
     -webkit-font-smoothing: antialiased;
@@ -40,7 +44,7 @@ body {
     padding: 1rem 0;
     position: sticky;
     top: 0;
-    background: rgba(255, 255, 255, 0.8);
+    background: rgba(12, 18, 33, 0.8);
     backdrop-filter: blur(10px);
     z-index: 100;
 }
@@ -138,7 +142,7 @@ body {
 }
 
 .filter-btn {
-    background: white;
+    background: rgba(255, 255, 255, 0.1);
     border: 1px solid var(--border);
     padding: 0.6rem 1.2rem;
     border-radius: 100px;
@@ -146,19 +150,18 @@ body {
     font-size: 0.9rem;
     cursor: pointer;
     transition: all 0.2s;
-    color: #000000;
-    /* Texte noir */
+    color: white;
 }
 
 .filter-btn:hover {
-    background: var(--bg-secondary);
-    border-color: var(--text-primary);
+    background: rgba(255, 255, 255, 0.2);
+    border-color: var(--accent);
 }
 
 .filter-btn.active {
-    background: var(--text-primary);
-    color: white !important;
-    border-color: var(--text-primary);
+    background: var(--accent);
+    color: #000 !important;
+    border-color: var(--accent);
 }
 
 /* Poll Cards */
@@ -170,7 +173,8 @@ body {
 }
 
 .poll-card {
-    background: white;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(5px);
     padding: 2.5rem;
     border-radius: 1.5rem;
     border: 1px solid var(--border);
@@ -217,20 +221,45 @@ body {
 .vote-btn.yes {
     background: var(--accent);
     border-color: var(--accent);
-    color: var(--text-primary);
+    color: #000;
 }
 
 .vote-btn.yes:hover {
     background: var(--accent-hover);
+    transform: scale(1.05);
 }
 
 .vote-btn.no {
-    background: white;
-    color: var(--text-primary);
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    border: 1px solid var(--border);
 }
 
 .vote-btn.no:hover {
-    background: var(--bg-secondary);
+    background: rgba(255, 255, 255, 0.2);
+    transform: scale(1.05);
+}
+
+/* Common Button */
+.button {
+    background: var(--accent);
+    color: #000;
+    padding: 1rem 2rem;
+    border-radius: 0.75rem;
+    border: none;
+    font-weight: 700;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.button:hover {
+    background: var(--accent-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(110, 232, 129, 0.3);
 }
 
 /* Progress Section */
@@ -256,7 +285,7 @@ body {
 
 .progress-bar-wrap {
     height: 10px;
-    background: #f3f4f6;
+    background: rgba(255, 255, 255, 0.1);
     border-radius: 10px;
     display: flex;
     overflow: hidden;
@@ -268,7 +297,7 @@ body {
 }
 
 .progress-fill-no {
-    background: #e5e7eb;
+    background: rgba(255, 255, 255, 0.05);
     height: 100%;
 }
 
@@ -279,6 +308,24 @@ body {
     color: var(--text-secondary);
     padding-top: 1.5rem;
     border-top: 1px solid var(--border);
+}
+
+.badge-finish {
+    background: var(--accent);
+    color: #000;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 0.65rem;
+    margin-left: 0.5rem;
+}
+
+.badge-ongoing {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--text-secondary);
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 0.65rem;
+    margin-left: 0.5rem;
 }
 
 .main-footer {
