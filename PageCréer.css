@@ -4,7 +4,8 @@
 }
 
 .create-form {
-    background: #ffffff;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
     padding: 2.5rem;
     border-radius: 1.5rem;
     border: 1px solid var(--border);
@@ -21,6 +22,7 @@
     font-weight: 700;
     font-family: var(--font-heading);
     font-size: 0.9rem;
+    color: var(--text-primary);
 }
 
 .form-input {
@@ -28,6 +30,8 @@
     padding: 0.8rem 1rem;
     border-radius: 0.75rem;
     border: 1px solid var(--border);
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
     font-family: var(--font-body);
     font-size: 1rem;
     transition: border-color 0.2s;
@@ -35,7 +39,7 @@
 
 .form-input:focus {
     outline: none;
-    border-color: var(--text-primary);
+    border-color: var(--accent);
 }
 
 .file-upload {
@@ -44,13 +48,14 @@
     text-align: center;
     border-radius: 0.75rem;
     color: var(--text-secondary);
+    background: rgba(255, 255, 255, 0.05);
     cursor: pointer;
     transition: all 0.2s;
 }
 
 .file-upload:hover {
-    border-color: var(--text-primary);
-    background: var(--bg-secondary);
+    border-color: var(--accent);
+    background: rgba(255, 255, 255, 0.1);
 }
 
 small {
