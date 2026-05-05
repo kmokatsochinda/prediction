@@ -1,0 +1,22 @@
+@inherits LayoutComponentBase
+
+<header class="header">
+    <div class="header-container">
+        <NavLink href="/" class="logo" Match="NavLinkMatch.All">
+            <img class="logo-icon" src="images/parismarket-logo.png" alt="ParisMarket" />
+            <span class="logo-text">ParisMarket</span>
+        </NavLink>
+        <nav class="nav">
+            <NavLink href="/" class="nav-link" Match="NavLinkMatch.All">Accueil</NavLink>
+            <NavLink href="/creer" class="nav-link">Créer</NavLink>
+            <NavLink href="/resultats" class="nav-link">Résultats</NavLink>
+            <button id="theme-toggle" class="theme-toggle" title="Changer de mode" type="button">☀</button>
+        </nav>
+    </div>
+</header>
+
+@Body
+
+<footer class="main-footer">
+    © 2026 ParisMarket. Plateforme de prédictions publiques.
+</footer>

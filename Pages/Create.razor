@@ -1,0 +1,88 @@
+@page "/creer"
+@inject PredictionService PredictionService
+@inject NavigationManager Navigation
+
+<PageTitle>Créer | ParisMarket</PageTitle>
+
+<main class="container page-shell narrow">
+    <section class="workspace-header single">
+        <div>
+            <p class="eyebrow">Nouvelle prédiction</p>
+            <h1>Créer une prédiction</h1>
+            <p class="muted">La question doit être claire et pouvoir recevoir une réponse Oui ou Non.</p>
+        </div>
+    </section>
+
+    @if (!string.IsNullOrWhiteSpace(errorMessage))
+    {
+        <div class="notice error">@errorMessage</div>
+    }
+
+    <EditForm Model="formModel" OnValidSubmit="CreatePrediction" class="create-form">
+        <DataAnnotationsValidator />
+
+        <div class="form-group">
+            <label for="category">Catégorie</label>
+            <InputSelect id="category" class="form-input" @bind-Value="formModel.Category">
+                @foreach (Category category in Enum.GetValues<Category>())
+                {
+                    <option value="@category">@DisplayCategory(category)</option>
+                }
+            </InputSelect>
+        </div>
+
+        <div class="form-group">
+            <label for="question">Question</label>
+            <InputTextArea id="question" class="form-input" @bind-Value="formModel.Question" rows="4" />
+            <small>Exemple : La France gagnera-t-elle la Coupe du Monde 2026 ?</small>
+        </div>
+
+        <div class="form-group">
+            <label for="closing-date">Date de clôture</label>
+            <InputDate id="closing-date" class="form-input" @bind-Value="formModel.ClosingDate" />
+        </div>
+
+        <button type="submit" class="button full-width">Publier la prédiction</button>
+    </EditForm>
+</main>
+
+@code {
+    private CreatePredictionForm formModel = new()
+    {
+        Category = Category.Technologie,
+        ClosingDate = DateTime.Today.AddDays(7)
+    };
+
+    private string? errorMessage;
+
+    private void CreatePrediction()
+    {
+        try
+        {
+            PredictionService.Create(new Prediction
+            {
+                Question = formModel.Question,
+                Category = formModel.Category,
+                ClosingDate = formModel.ClosingDate.Date.AddHours(23).AddMinutes(59)
+            });
+
+            Navigation.NavigateTo("/");
+        }
+        catch (Exception exception)
+        {
+            errorMessage = exception.Message;
+        }
+    }
+
+    private static string DisplayCategory(Category category)
+    {
+        return category == Category.Temperature ? "Température" : category.ToString();
+    }
+
+    private sealed class CreatePredictionForm
+    {
+        public string Question { get; set; } = string.Empty;
+        public Category Category { get; set; }
+        public DateTime ClosingDate { get; set; }
+    }
+}

@@ -1,0 +1,15 @@
+<Router AppAssembly="@typeof(App).Assembly">
+    <Found Context="routeData">
+        <RouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)" />
+        <FocusOnNavigate RouteData="@routeData" Selector="h1" />
+    </Found>
+    <NotFound>
+        <PageTitle>Page introuvable | ParisMarket</PageTitle>
+        <LayoutView Layout="@typeof(MainLayout)">
+            <main class="container page-shell">
+                <h1>Page introuvable</h1>
+                <p class="muted">Cette page n'existe pas dans la plateforme ParisMarket.</p>
+            </main>
+        </LayoutView>
+    </NotFound>
+</Router>

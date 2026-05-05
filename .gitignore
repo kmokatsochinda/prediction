@@ -41,6 +41,13 @@ coverage.cobertura.xml
 *.sqlite
 *.sqlite3
 
+# Environment and secrets
+.env
+.env.*
+!.env.example
+appsettings.Local.json
+appsettings.*.Local.json
+
 # OS files
 Thumbs.db
 ehthumbs.db

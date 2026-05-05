@@ -1,84 +1,92 @@
 <!DOCTYPE html>
-<html lang='fr'>
+<html lang="fr">
 <head>
-    <meta charset='UTF-8'>
-    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
-    <link rel='stylesheet' href='style.css'>
-    <title>Résultats des Paris | Blue Team</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/png" href="wwwroot/images/parismarket-logo.png">
+    <title>Résultats des Paris | ParisMarket</title>
 </head>
 <body>
-    <header class='header'>
-        <div class='header-container'>
-            <a href='index.html' class='logo'>🔥 Blue Team : Paries</a>
-            <nav class='nav'>
-                <a href='index.html' class='nav-link'>Accueil</a>
-                <a href='PageCréer.html' class='nav-link'>Créer</a>
-                <a href='#' class='nav-link active'>Résultats</a>
-                <button id='theme-toggle' class='theme-toggle' title='Changer de mode'>☀️</button>
+    <header class="header">
+        <div class="header-container">
+            <a href="index.html" class="logo">
+                <img class="logo-icon" src="wwwroot/images/parismarket-logo.png" alt="ParisMarket">
+                <span class="logo-text">ParisMarket</span>
+            </a>
+            <nav class="nav">
+                <a href="index.html" class="nav-link">Accueil</a>
+                <a href="PageCréer.html" class="nav-link">Créer</a>
+                <a href="PageDeResultat.html" class="nav-link active">Résultats</a>
+                <button id="theme-toggle" class="theme-toggle" title="Changer de mode">☀️</button>
             </nav>
         </div>
     </header>
-    <main class='container' style='padding-top:5rem;'>
-        <div class='hero'>
-            <h1>💰 Tableau des Scores</h1>
-            <p>Consultez les tendances en temps réel sur les événements majeurs.</p>
+    <main class="container" style="padding-top:5rem;">
+        <div class="hero">
+            <h1>Tableau des scores</h1>
+            <p>Consultez les tendances calculées à partir des votes enregistrés.</p>
         </div>
-        <div class='poll-grid'>
-            <div class='poll-card'>
-                <div class='poll-category'>SPORT ⏳</div>
-                <h2 class='poll-question'>La France gagnera-t-elle la Coupe du Monde 2026 ?</h2>
-                <div class='progress-section'>
-                    <div class='progress-labels'>
-                        <span class='oui-label'>OUI: 69,2% (Cote: 1,45)</span>
-                        <span class='non-label'>NON: 30,8% (Cote: 3,25)</span>
+        <div class="poll-grid">
+            <div class="poll-card">
+                <div class="poll-category">SPORT - Ouverte</div>
+                <h2 class="poll-question">La France gagnera-t-elle la Coupe du Monde 2026 ?</h2>
+                <div class="progress-section">
+                    <div class="progress-labels">
+                        <span class="oui-label">OUI: 66,7%</span>
+                        <span class="non-label">NON: 33,3%</span>
                     </div>
-                    <div class='progress-bar-wrap'>
-                        <div class='progress-fill-yes' style='width:69,2%'></div>
+                    <div class="progress-bar-wrap">
+                        <div class="progress-fill-yes" style="width:66.7%"></div>
                     </div>
                 </div>
-                <div class='poll-footer'>
-                    <span>👤 650 votes</span>
-                    <span>📅 Clôture : 18 Dec 2026</span>
+                <div class="poll-footer">
+                    <span>👤 3 votes</span>
+                    <span>📅 Clôture : 18/12/2026</span>
                 </div>
+                <p>Résultat final : non défini</p>
             </div>
-            <div class='poll-card'>
-                <div class='poll-category'>FINANCE ⏳</div>
-                <h2 class='poll-question'>Le Bitcoin dépassera-t-il les 100k$ avant 2027 ?</h2>
-                <div class='progress-section'>
-                    <div class='progress-labels'>
-                        <span class='oui-label'>OUI: 84,2% (Cote: 1,19)</span>
-                        <span class='non-label'>NON: 15,8% (Cote: 6,33)</span>
+            <div class="poll-card">
+                <div class="poll-category">FINANCE - Ouverte</div>
+                <h2 class="poll-question">Le Bitcoin d&#233;passera-t-il les 100k$ avant 2027 ?</h2>
+                <div class="progress-section">
+                    <div class="progress-labels">
+                        <span class="oui-label">OUI: 0,0%</span>
+                        <span class="non-label">NON: 0,0%</span>
                     </div>
-                    <div class='progress-bar-wrap'>
-                        <div class='progress-fill-yes' style='width:84,2%'></div>
+                    <div class="progress-bar-wrap">
+                        <div class="progress-fill-yes" style="width:0.0%"></div>
                     </div>
                 </div>
-                <div class='poll-footer'>
-                    <span>👤 950 votes</span>
-                    <span>📅 Clôture : 1 Jan 2027</span>
+                <div class="poll-footer">
+                    <span>👤 0 votes</span>
+                    <span>📅 Clôture : 01/01/2027</span>
                 </div>
+                <p>Résultat final : non défini</p>
             </div>
-            <div class='poll-card'>
-                <div class='poll-category'>TECHNOLOGIE ⏳</div>
-                <h2 class='poll-question'>L'IA remplacera-t-elle les développeurs juniors cette année ?</h2>
-                <div class='progress-section'>
-                    <div class='progress-labels'>
-                        <span class='oui-label'>OUI: 16,7% (Cote: 5,99)</span>
-                        <span class='non-label'>NON: 83,3% (Cote: 1,2)</span>
+            <div class="poll-card">
+                <div class="poll-category">TECHNOLOGIE - Ouverte</div>
+                <h2 class="poll-question">L&#39;IA remplacera-t-elle les d&#233;veloppeurs juniors cette ann&#233;e ?</h2>
+                <div class="progress-section">
+                    <div class="progress-labels">
+                        <span class="oui-label">OUI: 0,0%</span>
+                        <span class="non-label">NON: 0,0%</span>
                     </div>
-                    <div class='progress-bar-wrap'>
-                        <div class='progress-fill-yes' style='width:16,7%'></div>
+                    <div class="progress-bar-wrap">
+                        <div class="progress-fill-yes" style="width:0.0%"></div>
                     </div>
                 </div>
-                <div class='poll-footer'>
-                    <span>👤 720 votes</span>
-                    <span>📅 Clôture : 31 Dec 2026</span>
+                <div class="poll-footer">
+                    <span>👤 0 votes</span>
+                    <span>📅 Clôture : 31/12/2026</span>
                 </div>
-            </div></div>
+                <p>Résultat final : non défini</p>
+            </div>
+        </div>
     </main>
-    <footer class='main-footer'>
-        © 2026 Blue Team. Tous droits réservés.
+    <footer class="main-footer">
+        © 2026 ParisMarket. Tous droits réservés.
     </footer>
-    <script src='theme.js'></script>
+    <script src="theme.js"></script>
 </body>
 </html>

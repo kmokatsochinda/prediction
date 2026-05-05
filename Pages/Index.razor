@@ -1,0 +1,150 @@
+@page "/"
+@inject PredictionService PredictionService
+@inject UserService UserService
+
+<PageTitle>Accueil | ParisMarket</PageTitle>
+
+<main class="container page-shell">
+    <section class="workspace-header">
+        <div>
+            <p class="eyebrow">Plateforme publique</p>
+            <h1>Prédictions ouvertes</h1>
+            <p class="muted">Votez Oui ou Non sur les événements à venir et suivez la tendance collective.</p>
+        </div>
+        <div class="user-picker">
+            <label for="current-user">Utilisateur</label>
+            <select id="current-user" class="form-input compact" @bind="currentUserId">
+                @foreach (User user in users)
+                {
+                    <option value="@user.Id">@user.Username</option>
+                }
+            </select>
+        </div>
+    </section>
+
+    <section class="stats-grid app-stats">
+        <div class="stat-card">
+            <span class="stat-number">@OpenPredictions.Count()</span>
+            <span class="stat-label">Prédictions ouvertes</span>
+        </div>
+        <div class="stat-card">
+            <span class="stat-number">@predictions.Sum(prediction => prediction.TotalVotes)</span>
+            <span class="stat-label">Votes enregistrés</span>
+        </div>
+        <div class="stat-card">
+            <span class="stat-number">@users.Count</span>
+            <span class="stat-label">Participants de test</span>
+        </div>
+    </section>
+
+    @if (!string.IsNullOrWhiteSpace(message))
+    {
+        <div class="notice @messageKind">@message</div>
+    }
+
+    <div class="filters">
+        <button class="@FilterClass(null)" type="button" @onclick="() => SetFilter(null)">Tous</button>
+        @foreach (Category category in Enum.GetValues<Category>())
+        {
+            <button class="@FilterClass(category)" type="button" @onclick="() => SetFilter(category)">@DisplayCategory(category)</button>
+        }
+    </div>
+
+    <section class="poll-grid">
+        @foreach (Prediction prediction in FilteredPredictions)
+        {
+            <article class="poll-card">
+                <div class="poll-topline">
+                    <span class="poll-category">@DisplayCategory(prediction.Category)</span>
+                    <span class="status-badge open">Ouverte</span>
+                </div>
+                <h2 class="poll-question">@prediction.Question</h2>
+
+                <div class="poll-actions">
+                    <button class="vote-btn yes" type="button" disabled="@HasCurrentUserVoted(prediction)" @onclick="() => Vote(prediction.Id, true)">OUI</button>
+                    <button class="vote-btn no" type="button" disabled="@HasCurrentUserVoted(prediction)" @onclick="() => Vote(prediction.Id, false)">NON</button>
+                </div>
+
+                @if (HasCurrentUserVoted(prediction))
+                {
+                    <p class="inline-note">Vous avez déjà voté sur cette prédiction.</p>
+                }
+
+                <ProgressBar Prediction="prediction" />
+
+                <div class="poll-footer">
+                    <span>@prediction.TotalVotes participant(s)</span>
+                    <span>Clôture : @prediction.ClosingDate.ToString("dd/MM/yyyy")</span>
+                </div>
+            </article>
+        }
+    </section>
+
+    @if (!FilteredPredictions.Any())
+    {
+        <p class="empty-state">Aucune prédiction ouverte ne correspond à ce filtre.</p>
+    }
+</main>
+
+@code {
+    private List<Prediction> predictions = new();
+    private List<User> users = new();
+    private int currentUserId = 1;
+    private Category? selectedCategory;
+    private string? message;
+    private string messageKind = "success";
+
+    private IEnumerable<Prediction> OpenPredictions => predictions.Where(prediction => prediction.Status == PredictionStatus.Open);
+
+    private IEnumerable<Prediction> FilteredPredictions => OpenPredictions
+        .Where(prediction => selectedCategory is null || prediction.Category == selectedCategory);
+
+    protected override void OnInitialized()
+    {
+        Reload();
+    }
+
+    private void Vote(int predictionId, bool choice)
+    {
+        try
+        {
+            PredictionService.Vote(predictionId, currentUserId, choice);
+            message = "Vote enregistré.";
+            messageKind = "success";
+        }
+        catch (Exception exception)
+        {
+            message = exception.Message;
+            messageKind = "error";
+        }
+
+        Reload();
+    }
+
+    private bool HasCurrentUserVoted(Prediction prediction)
+    {
+        return prediction.Votes.Any(vote => vote.UserId == currentUserId);
+    }
+
+    private void Reload()
+    {
+        predictions = PredictionService.GetAll().ToList();
+        users = UserService.GetAll().ToList();
+        currentUserId = users.Any(user => user.Id == currentUserId) ? currentUserId : users.FirstOrDefault()?.Id ?? 1;
+    }
+
+    private string FilterClass(Category? category)
+    {
+        return selectedCategory == category ? "filter-btn active" : "filter-btn";
+    }
+
+    private void SetFilter(Category? category)
+    {
+        selectedCategory = category;
+    }
+
+    private static string DisplayCategory(Category category)
+    {
+        return category == Category.Temperature ? "Température" : category.ToString();
+    }
+}

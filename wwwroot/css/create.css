@@ -1,0 +1,41 @@
+.create-form {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.4rem;
+    box-shadow: var(--card-shadow);
+}
+
+.form-group {
+    margin-bottom: 1.2rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.45rem;
+    font-weight: 900;
+}
+
+.form-input {
+    width: 100%;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: var(--filter-btn-bg);
+    color: var(--text-primary);
+    padding: 0.82rem 0.9rem;
+}
+
+.form-input.compact {
+    padding: 0.7rem 0.8rem;
+}
+
+.form-input:focus {
+    outline: 2px solid rgba(97, 211, 148, 0.25);
+    border-color: var(--accent);
+}
+
+small {
+    display: block;
+    color: var(--text-secondary);
+    margin-top: 0.45rem;
+}

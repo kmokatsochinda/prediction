@@ -1,0 +1,95 @@
+@page "/resultats"
+@inject PredictionService PredictionService
+
+<PageTitle>Résultats | ParisMarket</PageTitle>
+
+<main class="container page-shell">
+    <section class="workspace-header">
+        <div>
+            <p class="eyebrow">Gestion et résultats</p>
+            <h1>Résultats des prédictions</h1>
+            <p class="muted">Clôturez une prédiction avec le résultat final, puis consultez les tendances enregistrées.</p>
+        </div>
+        <div class="summary-pill">@ClosedPredictions.Count() clôturée(s)</div>
+    </section>
+
+    @if (!string.IsNullOrWhiteSpace(message))
+    {
+        <div class="notice @messageKind">@message</div>
+    }
+
+    <section class="poll-grid">
+        @foreach (Prediction prediction in predictions)
+        {
+            <article class="poll-card">
+                <div class="poll-topline">
+                    <span class="poll-category">@DisplayCategory(prediction.Category)</span>
+                    <span class="status-badge @(prediction.Status == PredictionStatus.Closed ? "closed" : "open")">
+                        @(prediction.Status == PredictionStatus.Closed ? "Clôturée" : "Ouverte")
+                    </span>
+                </div>
+
+                <h2 class="poll-question">@prediction.Question</h2>
+
+                <ProgressBar Prediction="prediction" />
+
+                <div class="poll-footer">
+                    <span>@prediction.TotalVotes participant(s)</span>
+                    <span>Clôture : @prediction.ClosingDate.ToString("dd/MM/yyyy")</span>
+                </div>
+
+                @if (prediction.Status == PredictionStatus.Closed)
+                {
+                    <p class="result-line">Résultat final : <strong>@(prediction.FinalOutcome == true ? "OUI" : "NON")</strong></p>
+                }
+                else
+                {
+                    <div class="close-actions">
+                        <button class="button small" type="button" @onclick="() => Close(prediction.Id, true)">Clôturer résultat OUI</button>
+                        <button class="button small secondary" type="button" @onclick="() => Close(prediction.Id, false)">Clôturer résultat NON</button>
+                    </div>
+                }
+            </article>
+        }
+    </section>
+</main>
+
+@code {
+    private List<Prediction> predictions = new();
+    private string? message;
+    private string messageKind = "success";
+
+    private IEnumerable<Prediction> ClosedPredictions => predictions.Where(prediction => prediction.Status == PredictionStatus.Closed);
+
+    protected override void OnInitialized()
+    {
+        Reload();
+    }
+
+    private void Close(int predictionId, bool finalOutcome)
+    {
+        try
+        {
+            PredictionService.ClosePrediction(predictionId, finalOutcome);
+            message = "Prédiction clôturée.";
+            messageKind = "success";
+        }
+        catch (Exception exception)
+        {
+            message = exception.Message;
+            messageKind = "error";
+        }
+
+        Reload();
+    }
+
+    private void Reload()
+    {
+        predictions = PredictionService.GetAll().ToList();
+    }
+
+    private static string DisplayCategory(Category category)
+    {
+        return category == Category.Temperature ? "Température" : category.ToString();
+    }
+}

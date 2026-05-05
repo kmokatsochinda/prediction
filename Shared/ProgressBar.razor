@@ -1,0 +1,15 @@
+<div class="progress-section">
+    <div class="progress-labels">
+        <span class="oui-label">Oui, @Prediction.YesPercentage.ToString("0.0")%</span>
+        <span class="non-label">Non, @Prediction.NoPercentage.ToString("0.0")%</span>
+    </div>
+    <div class="progress-bar-wrap">
+        <div class="progress-fill-yes" style="width: @Prediction.YesPercentage.ToString("0.0", System.Globalization.CultureInfo.InvariantCulture)%"></div>
+        <div class="progress-fill-no" style="width: @Prediction.NoPercentage.ToString("0.0", System.Globalization.CultureInfo.InvariantCulture)%"></div>
+    </div>
+</div>
+
+@code {
+    [Parameter]
+    public Prediction Prediction { get; set; } = new();
+}

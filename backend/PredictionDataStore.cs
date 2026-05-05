@@ -3,6 +3,7 @@ using System.Text.Json.Serialization;
 
 namespace SiteDePrediction;
 
+// Lit et sauvegarde les données dans le fichier JSON.
 public class PredictionDataStore
 {
     private readonly string filePath;
@@ -18,6 +19,7 @@ public class PredictionDataStore
         jsonOptions.Converters.Add(new JsonStringEnumConverter());
     }
 
+    // Charge les données. Si le fichier n'existe pas, on utilise des données de départ.
     public PredictionDatabase Load()
     {
         if (!File.Exists(filePath))
@@ -35,6 +37,7 @@ public class PredictionDataStore
         return database ?? CreateDefaultDatabase();
     }
 
+    // Sauvegarde toutes les données dans le fichier JSON.
     public void Save(PredictionDatabase database)
     {
         string? directory = Path.GetDirectoryName(filePath);

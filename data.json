@@ -1,44 +1,144 @@
-[
-  {
-    "Id": 1,
-    "Question": "La France gagnera-t-elle la Coupe du Monde 2026 ?",
-    "Category": 1,
-    "YesVotes": 450,
-    "NoVotes": 200,
-    "Status": 0,
-    "ClosingDate": "18 Dec 2026",
-    "Total": 650,
-    "YesPct": 69.2,
-    "NoPct": 30.8,
-    "OddsYes": 1.45,
-    "OddsNo": 3.25
-  },
-  {
-    "Id": 2,
-    "Question": "Le Bitcoin d\u00E9passera-t-il les 100k$ avant 2027 ?",
-    "Category": 5,
-    "YesVotes": 800,
-    "NoVotes": 150,
-    "Status": 0,
-    "ClosingDate": "1 Jan 2027",
-    "Total": 950,
-    "YesPct": 84.2,
-    "NoPct": 15.8,
-    "OddsYes": 1.19,
-    "OddsNo": 6.33
-  },
-  {
-    "Id": 3,
-    "Question": "L\u0027IA remplacera-t-elle les d\u00E9veloppeurs juniors cette ann\u00E9e ?",
-    "Category": 0,
-    "YesVotes": 120,
-    "NoVotes": 600,
-    "Status": 0,
-    "ClosingDate": "31 Dec 2026",
-    "Total": 720,
-    "YesPct": 16.7,
-    "NoPct": 83.3,
-    "OddsYes": 5.99,
-    "OddsNo": 1.2
-  }
-]
+{
+  "Predictions": [
+    {
+      "Id": 1,
+      "Question": "La France gagnera-t-elle la Coupe du Monde 2026 ?",
+      "Category": "Sport",
+      "Status": "Open",
+      "ClosingDate": "2026-12-18T00:00:00",
+      "CreatedAt": "2026-04-30T00:00:00",
+      "ClosedAt": null,
+      "FinalOutcome": null,
+      "Votes": [
+        {
+          "Id": 1,
+          "PredictionId": 1,
+          "UserId": 1,
+          "IsYes": true,
+          "CreatedAt": "2026-04-30T00:00:00"
+        },
+        {
+          "Id": 2,
+          "PredictionId": 1,
+          "UserId": 2,
+          "IsYes": true,
+          "CreatedAt": "2026-04-30T00:00:00"
+        },
+        {
+          "Id": 3,
+          "PredictionId": 1,
+          "UserId": 3,
+          "IsYes": false,
+          "CreatedAt": "2026-04-30T00:00:00"
+        }
+      ]
+    },
+    {
+      "Id": 2,
+      "Question": "Le Bitcoin d\u00E9passera-t-il les 100k$ avant 2027 ?",
+      "Category": "Finance",
+      "Status": "Closed",
+      "ClosingDate": "2027-01-01T00:00:00",
+      "CreatedAt": "2026-04-30T00:00:00",
+      "ClosedAt": "2026-05-04T08:43:24.5750864Z",
+      "FinalOutcome": false,
+      "Votes": [
+        {
+          "Id": 4,
+          "PredictionId": 2,
+          "UserId": 1,
+          "IsYes": true,
+          "CreatedAt": "2026-05-04T08:41:29.3221899Z"
+        }
+      ]
+    },
+    {
+      "Id": 3,
+      "Question": "L\u0027IA remplacera-t-elle les d\u00E9veloppeurs juniors cette ann\u00E9e ?",
+      "Category": "Technologie",
+      "Status": "Open",
+      "ClosingDate": "2026-12-31T00:00:00",
+      "CreatedAt": "2026-04-30T00:00:00",
+      "ClosedAt": null,
+      "FinalOutcome": null,
+      "Votes": [
+        {
+          "Id": 5,
+          "PredictionId": 3,
+          "UserId": 1,
+          "IsYes": false,
+          "CreatedAt": "2026-05-04T08:51:22.3944624Z"
+        }
+      ]
+    },
+    {
+      "Id": 4,
+      "Question": "Karl Mike va t-il devenir pr\u00E9sident ?",
+      "Category": "Technologie",
+      "Status": "Open",
+      "ClosingDate": "2026-05-11T23:59:00+02:00",
+      "CreatedAt": "2026-05-04T08:41:49.1145393Z",
+      "ClosedAt": null,
+      "FinalOutcome": null,
+      "Votes": []
+    },
+    {
+      "Id": 5,
+      "Question": "Est ce que Monsieur Tetart arrivera \u00E0 l\u0027heure le 05/05/2026",
+      "Category": "Politique",
+      "Status": "Open",
+      "ClosingDate": "2026-05-11T23:59:00+02:00",
+      "CreatedAt": "2026-05-04T08:43:07.0728168Z",
+      "ClosedAt": null,
+      "FinalOutcome": null,
+      "Votes": []
+    },
+    {
+      "Id": 6,
+      "Question": "Est ce que la planette terre va s\u0027\u00E9teindre en 2040 ?",
+      "Category": "Science",
+      "Status": "Closed",
+      "ClosingDate": "2026-05-12T23:59:00+02:00",
+      "CreatedAt": "2026-05-05T07:33:11.6162777Z",
+      "ClosedAt": "2026-05-05T07:34:19.9980538Z",
+      "FinalOutcome": false,
+      "Votes": [
+        {
+          "Id": 6,
+          "PredictionId": 6,
+          "UserId": 1,
+          "IsYes": true,
+          "CreatedAt": "2026-05-05T07:33:33.106657Z"
+        },
+        {
+          "Id": 7,
+          "PredictionId": 6,
+          "UserId": 2,
+          "IsYes": false,
+          "CreatedAt": "2026-05-05T07:33:41.5456522Z"
+        },
+        {
+          "Id": 8,
+          "PredictionId": 6,
+          "UserId": 3,
+          "IsYes": false,
+          "CreatedAt": "2026-05-05T07:33:50.6757119Z"
+        }
+      ]
+    }
+  ],
+  "Users": [
+    {
+      "Id": 1,
+      "Username": "alice"
+    },
+    {
+      "Id": 2,
+      "Username": "bob"
+    },
+    {
+      "Id": 3,
+      "Username": "charlie"
+    }
+  ]
+}
