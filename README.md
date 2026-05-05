@@ -62,15 +62,34 @@ Si tout fonctionne, vous verrez l’application s’ouvrir dans votre navigateur
 - wwwroot → les fichiers visuels, comme le style, les images et le JavaScript
 - docs → les documents d’explication du projet
 
-## 7. Tester rapidement
+## 7. Roadmap dans le temps de ce qu'on a pu faire
 
-Pour lancer un test simple, taper :
+**Phase 1 — Conception**
+- Définition du projet et des fonctionnalités = Tout le monde
+- Répartition des rôles = Tout le monde
+- Modélisation des données (Prediction, Vote, User) = Maxence
 
-```bash
-dotnet run -- --test
-```
+**Phase 2 — Mise en place**
+- Création des pages Blazor (accueil, création, résultats) = Eddy
+- Mise en place du stockage JSON = Maxence 
+- Première logique de création et de vote = Karl
 
-Cela permet de vérifier que les fonctions principales marchent.
+**Phase 3 — Fonctionnalités**
+- Ajout des règles métier (double vote, clôture, validation) = Karl Mike
+- Connexion entre frontend et backend = Maxence
+- Affichage des résultats (pourcentages) = Eddy
+
+**Phase 4 — Amélioration**
+- Sécurisation des règles = Karl Mike
+- Ajout de tests simples = Maxence
+- Amélioration de l’interface et du design = Eddy
+
+**Phase 5 — Finalisation**
+- Tests globaux = Karl et Maxence
+- Correction des bugs = Karl
+- Préparation du projet pour la présentation = Eddy
+
+
 
 ## 8. Limites du projet
 
@@ -90,4 +109,6 @@ Cela permet de vérifier que les fonctions principales marchent.
 
 ## 👨 10. Auteurs
 
-- Membres du projet à compléter
+- Karl Mike
+- Marchand Maxence
+- Eddy
